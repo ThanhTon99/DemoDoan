@@ -35,12 +35,8 @@ export const sideNavItems: SideNavItems = {
                         link: '/dashboard/static',
                     },
                     {
-                        text: 'Static1',
+                        text: 'Manage Document',
                         link: '/dashboard/mangedocument',
-                    },
-                    {
-                        text: 'Static2',
-                        link: '#',
                     },
                 ]
             },
@@ -70,7 +66,7 @@ export const sideNavItems: SideNavItems = {
                         link: '/auth/forgot-password',
                     },
                     {
-                        text: 'Ingame',
+                        text: 'Manage User',
                         link:'/auth/manageUser'
                     },
                 ],
