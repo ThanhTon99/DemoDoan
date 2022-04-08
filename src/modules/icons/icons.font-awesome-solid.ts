@@ -16,9 +16,13 @@ import {
     faTable,
     faTachometerAlt,
     faUser,
+    faAsterisk,
+    faUserFriends,
 } from '@fortawesome/free-solid-svg-icons';
 
 export const fontAwesomeSolidIcons = {
+    faUserFriends,
+    faAsterisk,
     faAngleDown,
     faAngleRight,
     faArrowLeft,

@@ -29,16 +29,7 @@ export const sideNavItems: SideNavItems = {
         submenu: [
             {
                 text: 'Static Navigation',
-                submenu:[
-                    {
-                        text: 'Static',
-                        link: '/dashboard/static',
-                    },
-                    {
-                        text: 'Manage Document',
-                        link: '/dashboard/mangedocument',
-                    },
-                ]
+                link: '/dashboard/static',
             },
             {
                 text: 'Light Sidenav',
@@ -87,6 +78,84 @@ export const sideNavItems: SideNavItems = {
                         link: '/error/500',
                     },
                     
+                ],
+            },
+            {   
+                icon: 'asterisk',
+                text: 'Chức Năng',
+                submenu: [
+                    {
+                        text: 'Quản Lý Phòng Ban',
+                        link:'#',
+                    },
+                    {
+                        text: 'Quản Lý Nhân Viên',
+                        link:'#',
+                    },
+                    {
+                        text:'Quản Lý Chức Vụ',
+                        link: '',
+                    },
+                ],
+            },
+            {
+                text: 'Người Dùng',
+                submenu: [
+                    {
+                        text: 'Quản Lý Người Dùng',
+                        link:'#',
+                    },
+                    {
+                        text: 'Quản Lý Nhóm Người Dùng',
+                        link:'#',
+                    },
+                ],
+            },
+            {
+                text: 'Văn Bản',
+                submenu: [
+                    {
+                        text: 'Quản Lý Loại Văn Bản',
+                        link:'#',
+                    },
+                    {
+                        text: 'Quản Lý Nơi Đến',
+                        link:'#',
+                    },
+                    {
+                        text:'Quản Lý Văn Bản Đến',
+                        link: '',
+                    },
+                ],
+            },
+            {
+                text: 'Công Việc',
+                submenu: [
+                    {
+                        text: 'Phân Công Công Việc',
+                        link:'#',
+                    },
+                    {
+                        text: 'Quản Lý Công Việc',
+                        link:'#',
+                    },
+                    {
+                        text:'Quản Lý Báo Cáo Công Việc',
+                        link: '',
+                    },
+                ],
+            },
+            {
+                text: 'Báo Cáo Xử Lý',
+                submenu: [
+                    {
+                        text: 'Theo Dõi Văn Bản Quá Hạn',
+                        link:'#',
+                    },
+                    {
+                        text: 'Báo Cáo Văn Bản Đến',
+                        link:'#',
+                    },
                 ],
             },
         ],

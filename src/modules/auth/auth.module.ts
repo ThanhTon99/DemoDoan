@@ -19,6 +19,8 @@ import * as authGuards from './guards';
 
 /* Services */
 import * as authServices from './services';
+import { CKEditorModule } from 'ckeditor4-angular';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
     imports: [
@@ -28,7 +30,8 @@ import * as authServices from './services';
         FormsModule,
         AppCommonModule,
         NavigationModule,
-        
+        CKEditorModule,
+        Ng2SearchPipeModule,
     ],
     providers: [...authServices.services, ...authGuards.guards, ],
     declarations: [...authContainers.containers, ...authComponents.components,],

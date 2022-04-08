@@ -1,13 +1,207 @@
-
 <sb-layout-dashboard>
   <sb-dashboard-head title="Dashboard Static" [hideBreadcrumbs]="false"></sb-dashboard-head>
-  <sb-card>
-    <div class="card-header">
-      <fa-icon class="mr-1" [icon]='["fas", "chart-pie"]'></fa-icon>Forgot PassWord
+  <!DOCTYPE html>
+  <html lang="en">
+
+  <head>
+    <title>Bootstrap Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+
+    <nav class="navbar" style="background: linear-gradient(to right, rgb(36, 49, 105), rgb(7, 171, 226));">
+      <div class="container-fluid">
+        <h1 title="Đât là tiêu đề" style="color: aliceblue;">Angular CRUD</h1>
+        <div class="d-flex">
+          <button title="Thông Báo" routerLink="/notifymanage" class="btn btn-light mx-2" *ngIf="showMessage"><i
+              class="fas fa-bell"></i></button>
+          <button title="User" routerLink="/user" class="btn btn-light mx-2"><i class="fab fa-angellist"></i></button>
+          <button title="Thêm Mới" (click)="clickAddNotify()" type="button" data-bs-toggle="modal"
+            data-bs-target="#exampleModal" class="btn btn-success">Add Notify</button>
+          <button title="Thoát" routerLink="/login" class="btn btn-danger mx-2">Logout</button>
+        </div>
+      </div>
+    </nav>
+    <!-- <div class="background"></div> -->
+    <div class="container-fluid">
+      <br>
+      <div class="col-md-3 form-group pull-right" style="margin-right:7% ;">
+        <div class="input-group">
+          <input type="text" class="form-control" name="filter" [(ngModel)]="filter" placeholder=" Search...">
+          <span>
+            <button class="btn mx-1" type="button" style="background-color: #5ecaca;">Tìm Kiếm</button>
+          </span>
+        </div>
+      </div>
+      <table class="table table-bordered ">
+        <thead style="background-color: #5394b9">
+          <tr>
+            <th scope="col">Notify ID</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <!-- <th scope="col">PhotoFileName</th> -->
+            <th scope="col">Activate</th>
+            <th scope="col">Display</th>
+            <th scope="col">Login</th>
+            <th scope="col">Department</th>
+            <th scope="col" style="width:15%">Action</th>
+            <!-- <th scope="col">Kiểu Thông Báo</th>
+          <th scope="col">Kích Hoạt</th>
+          <th scope="col">Action</th> -->
+          </tr>
+        </thead>
+        <tbody style="background-color: #d9e9e9">
+          <tr *ngFor="let row of notifyData | filter:filter">
+            <td>{{row.NotifyId}}</td>
+            <td>{{row.Title}}</td>
+            <td>{{row.Description}}</td>
+            <!-- <td>{{row.PhotoFileName}}</td> -->
+            <td>{{row.Activate}}</td>
+            <td>{{row.Display}}</td>
+            <td>{{row.Login}}</td>
+            <td>{{row.Department}}</td>
+            <!-- <td><div [innerHtml]="row.Content"></div></td> -->
+            <!-- <td>{{row.start | date:'dd/MM/Y'}}</td>
+          <td>{{row.end | date:'dd/MM/Y'}}</td>
+          <td>{{row.display}}</td>
+          <td>{{row.login}}</td>
+          <td>{{row.activate}}</td> -->
+            <td>
+              <button title="Sửa" (click)="onEdit(row)" type="button" data-bs-toggle="modal"
+                data-bs-target="#exampleModal" class="btn btn-info">Edit</button>
+              <button title="Xóa" (click)="deleteNotify(row)" class="btn btn-danger mx-2">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="card-body">
-      <sb-layout-dashboard></sb-layout-dashboard>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Notify Detail</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form #formValue="ngForm">
+              <div class="card-body">
+                <div class="form-group col-md-12 ">
+                  <label for="title">Tiêu Đề<a id="sao"> (*)</a></label>
+                  <input [class.is-invalid]="Title.invalid && Title.touched" type="text" required
+                    [(ngModel)]="notifyModelObj.Title" #Title="ngModel" class="form-control" name="Title"
+                    placeholder="Tiêu Đề">
+                  <small *ngIf="formValue.invalid && formValue.touched" class="form-text text-danger">Yêu cầu điền thông
+                    tin</small>
+                </div>
+
+                <div class="form-group col-md-12">
+                  <label>Mô Tả</label>
+                  <input type="text" [(ngModel)]="notifyModelObj.Description" class="form-control" name="Description"
+                    placeholder="Mô Tả">
+                  <small class="form-text text-danger"></small>
+                </div>
+
+                <div class="form-group col-12 ">
+                  <label>Link</label>
+                  <input type="text" class="form-control" name="Department" placeholder="http://...">
+                  <small class="form-text text-muted"></small>
+                </div>
+
+                <div class="form-group col-12 ">
+                  <label>Nội Dung</label>
+                  <ckeditor [(ngModel)]="notifyModelObj.Content" name="Content"></ckeditor>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <label>Kiểu Hiển Thị</label>
+                    <select class="form-control" [(ngModel)]="notifyModelObj.Display" name="display">
+                      <option value="tintuc">Tin Tức</option>
+                      <option value="thongbao">Thông Báo</option>
+                      <option value="slide">Slide Ảnh</option>
+                    </select>
+                    <small class="form-text text-muted" *ngIf="formValue.invalid && formValue.untouched">Chọn kiểu hiển
+                      thị</small>
+                  </div>
+
+                  <div class="form-group col-md-4">
+                    <label>Kiểu Thông Báo</label>
+                    <select class="form-control" [(ngModel)]="notifyModelObj.Login" name="login">
+                      <option value="truoc">Trước Khi Đăng Nhập</option>
+                      <option value="sau">Sau Khi Đăng Nhập</option>
+                    </select>
+                    <small class="form-text text-muted" *ngIf="formValue.invalid && formValue.untouched">Chọn kiểu thông
+                      báo</small>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <label for="name">Bắt Đầu <a id="sao"></a></label>
+                    <input type="date" class="form-control" name="start">
+                    <small class="form-text text-danger" name="start"></small>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="name">Kết Thúc <a id="sao"></a></label>
+                    <input type="date" class="form-control" name="end">
+                    <small class="form-text text-danger" name="end"></small>
+                  </div>
+                </div>
+
+                <div class="form-row ">
+                  <div class="form-group col-md-2">Kích Hoạt
+                    <input type="checkbox" [(ngModel)]="notifyModelObj.Activate" name="activate">
+                  </div>
+                  <div class="form-group col-md-2">Cho phép hết hạn
+                    <input type="checkbox" />
+                  </div>
+                </div>
+
+                <!-- <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label for="formFile" class="form-label">
+
+                    <input type="text" name="PhotoFileName" id="PhotoFileName"
+                      style="border: #ffffff; background: none;"
+                      disabled><br><br>
+                    <input class="form-control" 
+                      (change)="onUpload($event)" (change)="onFileSelected($event)" type="file" id="file">
+                  </label>
+                </div> 
+
+                <div class="form-group col-md-2">
+                  <label for="image">
+                    <img *ngFor='let url of urls' [src]="url" height="130" width="150">
+                  </label>
+                </div>
+              </div> -->
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button (click)="postNotifyDatails()" type="submit" *ngIf="showAdd" value="Submit"
+              [disabled]="formValue.invalid" class="btn btn-primary">Add</button>
+            <button (click)="updateNotifyDatails()" type="submit" *ngIf="showUpdate" value="Submit"
+              [disabled]="formValue.invalid" class="btn btn-primary">Update</button>
+            <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-  </sb-card>
+  </body>
+
+  </html>
 </sb-layout-dashboard>
