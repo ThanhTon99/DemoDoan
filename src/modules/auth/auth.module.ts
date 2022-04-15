@@ -19,6 +19,7 @@ import * as authGuards from './guards';
 
 /* Services */
 import * as authServices from './services';
+
 import { CKEditorModule } from 'ckeditor4-angular';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 

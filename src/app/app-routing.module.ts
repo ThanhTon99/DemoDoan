@@ -25,6 +25,21 @@ const routes: Routes = [
             import('modules/auth/auth-routing.module').then(m => m.AuthRoutingModule),
     },
     {
+        path:'chucnang',
+        loadChildren:() =>
+            import('modules/chucnang/chucnang-routing.module').then(m => m.ChucnangRoutingModule),
+    },
+    {
+        path:'vanbanden',
+        loadChildren:() =>
+            import('modules/vanbanden/vanbanden-routing.module').then(m => m.VanbandenRoutingModule),
+    },
+    {
+        path:'congviec',
+        loadChildren:() =>
+        import('modules/congviec/congviec-routing.module').then(m => m.CongviecRoutingModule),
+    },
+    {
         path: 'error',
         loadChildren: () =>
             import('modules/error/error-routing.module').then(m => m.ErrorRoutingModule),

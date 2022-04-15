@@ -12,15 +12,13 @@ import { ApiService } from '@app/Service/api.service';
 export class MangeUserComponent implements OnInit {
 
   PhotoFileName: any;
-  notify: NotifyModel | undefined
   urls: string[] = [];
-  @ViewChild('formValue') child !: HTMLElement 
-  formValue !: FormGroup;
+  @ViewChild('formValue') formValue !: FormGroup;
   notifyModelObj: NotifyModel = new NotifyModel()
   notifyData: any = [];
   showAdd !: boolean
   showUpdate!: boolean
-  closeResult = ''
+
   todaydate = new Date()
   message: any;
   filter: any;
@@ -35,8 +33,10 @@ export class MangeUserComponent implements OnInit {
   ngOnInit(): void {
     this.getAllNotify();
   }
-  ngAfterViewInit() {
-    console.log("ngAfterViewInit", this.child);
+  getAllNotify() {
+    this.api.getNotify().subscribe(res => {
+      this.notifyData = res;
+    })
   }
   onFileSelected(event: any) {
     this.selectedFile = <File>event.target.files[0];
@@ -72,7 +72,7 @@ export class MangeUserComponent implements OnInit {
     // this.urls.push("http://localhost:57050/Photos/" + row.PhotoFileName)
   }
   postNotifyDatails() {
-    this.urls = [];
+    //this.urls = [];
     this.api.postNotify(this.notifyModelObj).subscribe(res => {
       console.log(res);
       alert("Notify Added Successfully")
@@ -95,11 +95,7 @@ export class MangeUserComponent implements OnInit {
       alert("Something Wrong")
     })
   }
-  getAllNotify() {
-    this.api.getNotify().subscribe(res => {
-      this.notifyData = res;
-    })
-  }
+  
   deleteNotify(row: any) {
     this.api.deleteNotify(row.NotifyId).subscribe(() => {
       alert("Notify Deleted")

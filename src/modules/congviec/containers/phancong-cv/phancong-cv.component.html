@@ -1,0 +1,136 @@
+<sb-layout-dashboard>
+  <sb-dashboard-head title="Phân Công Công Việc" [hideBreadcrumbs]="false"></sb-dashboard-head>
+
+  <div class="container-fluid">
+    <br>
+    <div class="col-md-4 form-group pull-right" style="margin-right:7% ;">
+      <div class="input-group">
+        <input type="text" class="form-control" name="filter" [(ngModel)]="filter" placeholder=" Search...">
+        <span>
+          <button class="btn mx-1" type="button" style="background-color: #5ecaca;">Tìm Kiếm</button>
+          <!-- <button title="Thêm Mới" (click)="clickAdd()" type="button" data-toggle="modal" data-target="#exampleModal"
+            class="btn btn-success">Thêm Mới</button> -->
+        </span>
+      </div>
+    </div>
+    <table class="table table-bordered ">
+      <thead style="background-color: #ae91f1">
+        <tr>
+          <th scope="col" style="width:11%">Số Thứ Tự</th>
+          <th scope="col">Tên Văn Bản</th>
+          <th scope="col">Mô Tả Văn Bản</th>
+          <th scope="col">Nơi Gửi</th>
+          <th scope="col">Tên Nhân Viên</th>
+          <th scope="col">Trạng Thái Xử Lý</th>
+          <th scope="col" style="width:13%">Action</th>
+        </tr>
+      </thead>
+      <tbody style="background-color: #d9e9e9">
+        <tr *ngFor="let row of Data| filter:filter">
+          <td>{{row.IdVbden}}</td>
+          <td>{{row.TenVbden}}</td>
+          <td>{{row.MotaVbden}}</td>
+          <td>{{row.Noiden}}</td>
+          <td>{{row.TenNhanvien}}</td>
+          <td><span class="badge badge-success">{{message}}</span></td>
+          <td>
+            <!-- <a title="Sửa" type="button" data-toggle="modal" (click)="onedit(row)" data-target="#exampleModal"
+              class="btn btn-info mx-2">Sửa</a> -->
+            <!-- <button title="Xóa" class="btn btn-danger mx-1" (click)="deletePhancongCv(row)">Xóa</button> -->
+            <a title="Phân Công" type="button" data-toggle="modal" (click)="onedit(row)" data-target="#phancongModal"
+              class="btn btn-warning">Phân Công</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document" style="margin-top:3% ;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Chi Tiết Văn Bản Đến</h5>
+          <button type="button" id="close" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>  
+        <div class="modal-body">
+          <form #formValue="ngForm">
+            <div class="card-body">
+              <div class="form-group col-md-12 ">
+                <label for="title">Tên Văn Bản Đến</label>
+                <input [class.is-invalid]="Name.invalid && Name.touched" type="text" required
+                  [(ngModel)]="QlVbdenModel.TenVbden" #Name="ngModel" class="form-control" name="Name"
+                  placeholder="Tên Văn Bản Đến" disabled="">
+                <small *ngIf="formValue.invalid && formValue.touched" class="form-text text-danger">Yêu cầu điền thông
+                  tin</small>
+              </div>
+              <div class="form-group col-12 ">
+                <label>Mô Tả Văn Bản Đến</label>
+                <textarea [(ngModel)]="QlVbdenModel.MotaVbden" class="form-control" name="mota" placeholder="Mô Tả Văn Bản Đến" disabled="">
+                </textarea>
+              </div>
+              <div class="form-group col-md-6">
+                <label>Tên Nơi Đến</label>
+                <input class="form-control" type="text" [(ngModel)]="QlVbdenModel.Noiden" name="Noiden" disabled="">
+                <small class="form-text text-muted" *ngIf="formValue.invalid && formValue.untouched">Chọn Nơi Đến</small>
+              </div>
+              <div class="form-group col-md-6">
+                <label>Tên Nhân Viên</label>
+                <input class="form-control" type="text" [(ngModel)]="QlVbdenModel.TenNhanvien" name="Noiden" disabled="">
+                <small class="form-text text-muted" *ngIf="formValue.invalid && formValue.untouched">Chọn Nơi Đến</small>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button  type="submit" value="Submit" class="btn btn-primary">Phân Công</button>
+           <!-- <button (click)="KduyetVbden()" type="submit" value="Submit" class="btn btn-danger">Không Duyệt Văn Bản</button> -->
+          <!-- <button type="button" id="cancel" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  -->
+  <div class="modal fade" id="phancongModal" tabindex="-1" role="dialog" aria-labelledby="phancongModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document" style="margin-top:3% ;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="phancongModalLabel">Phân Công Nhân Viên</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form #formValue="ngForm">
+            <div class="card-body">
+              <div class="form-row">
+                <div class="form-group col-md-12 ">
+                  <label for="title">Tên Nhân Viên </label>
+                  <select class="form-control" [(ngModel)]="QlVbdenModel.TenNhanvien" name="TenNhanvien">
+                    <option value="0" disabled>--Select--</option>
+                    <option *ngFor="let data of DataNhanvien" [ngValue]="data.TenNhanvien">{{data.TenNhanvien}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-12 ">
+                  <label> Ghi Chú</label>
+                  <input class="form-control" type="text" [(ngModel)]="PhancongCvModle.Note" name="Ghichu"
+                    placeholder="Ghi Chú">
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button (click)="updateNv()" (change)="updateGhichu()" type="submit" *ngIf="showUpdate" value="Submit"
+            class="btn btn-primary" >Phân Công</button>
+          <button type="button" id="cancel1" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,105 @@
+<sb-layout-dashboard>
+  <sb-dashboard-head title="Quản Lý Nhân Viên" [hideBreadcrumbs]="false"></sb-dashboard-head>
+
+  <div class="container-fluid">
+    <br>
+    <div class="col-md-4 form-group pull-right" style="margin-right:7% ;">
+      <div class="input-group">
+        <input type="text" class="form-control" name="filter" [(ngModel)]="filter" placeholder=" Search...">
+        <span>
+          <button class="btn mx-1" type="button" style="background-color: #5ecaca;">Tìm Kiếm</button>
+          <button title="Thêm Mới" (click)="clickAdd()" type="button" data-toggle="modal" data-target="#exampleModal"
+            class="btn btn-success">Thêm Mới</button>
+        </span>
+      </div>
+    </div>
+    <table class="table table-bordered ">
+      <thead style="background-color: #ecc368">
+        <tr>
+          <th scope="col" style="width:11%">Số Thứ Tự</th>
+          <th scope="col">Tên Nhân Viên</th>
+          <th scope="col">Địa Chỉ</th>
+          <th scope="col">Số Điện Thoại</th>
+          <th scope="col">Chức Vụ</th>
+          <th scope="col" style="width:12%">Action</th>
+        </tr>
+      </thead>
+      <tbody style="background-color: #d9e9e9">
+        <tr *ngFor="let row of Data| filter:filter">
+          <td>{{row.IdNhanvien}}</td>
+          <td>{{row.TenNhanvien}}</td>
+          <td>{{row.Diachi}}</td>
+          <td>{{row.Sodienthoai}}</td>
+          <td>{{row.TenChucvu}}</td>
+          <td>
+            <a title="Sửa" type="button" data-toggle="modal" (click)="onedit(row)" data-target="#exampleModal"
+              class="btn btn-info">Sửa</a>
+            <button title="Xóa" class="btn btn-danger mx-2" (click)="deleteNhanvien(row)">Xóa</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document" style="margin-top:3% ;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Chi Tiết Nhân Viên</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form #formValue="ngForm">
+            <div class="card-body">
+              <div class="form-row">
+                <div class="form-group col-md-6 ">
+                  <label for="title">Tên Nhân Viên<a id="sao"> (*)</a></label>
+                  <input [class.is-invalid]="Name.invalid && Name.touched" type="text" required
+                    [(ngModel)]="QlNhanvienModel.TenNhanvien" #Name="ngModel" class="form-control" name="Name"
+                    placeholder="Tên Nhân Viên">
+                  <small *ngIf="formValue.invalid && formValue.touched" class="form-text text-danger">Yêu cầu điền thông
+                    tin</small>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6 ">
+                  <label> Địa Chỉ </label>
+                  <input class="form-control" type="text" [(ngModel)]="QlNhanvienModel.Diachi" name="mota"
+                    placeholder="Địa Chỉ">
+                  <small></small>
+                </div>
+                <div class="form-group col-md-6 ">
+                  <label> Số Điện Thoại </label>
+                  <input class="form-control" type="text" [(ngModel)]="QlNhanvienModel.Sodienthoai" name="Sodienthoai"
+                    placeholder="Số Điện Thoại">
+                </div>
+              </div>
+
+              <div class="form-group col-md-4">
+                <label>Tên Chức Vụ</label>
+                <select class="form-control" [(ngModel)]="QlNhanvienModel.TenChucvu" name="TenChucvu">
+                  <option value="0" disabled>--Select--</option>
+                  <option *ngFor="let data of DataChucvu" [ngValue]="data.TenChucvu">{{data.TenChucvu}}</option>
+                </select>
+                <!-- {{QlPhongbanModel.TenChucvu | json}} -->
+                <small class="form-text text-muted" *ngIf="formValue.invalid && formValue.untouched">Chọn Chức
+                  Vụ</small>
+              </div>
+
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button (click)="postNhanvien()" type="submit" *ngIf="showAdd" value="Submit" [disabled]="formValue.invalid"
+            class="btn btn-primary">Add</button>
+          <button (click)="updateNhanvien()" type="submit" *ngIf="showUpdate" value="Submit"
+            [disabled]="formValue.invalid" class="btn btn-primary">Update</button>
+          <button type="button" id="cancel" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

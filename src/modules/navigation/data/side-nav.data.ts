@@ -62,7 +62,8 @@ export const sideNavItems: SideNavItems = {
                     },
                 ],
             },
-            {
+            {   
+               // icon:'ban',
                 text: 'Error',
                 submenu: [
                     {
@@ -81,78 +82,100 @@ export const sideNavItems: SideNavItems = {
                 ],
             },
             {   
-                icon: 'asterisk',
+                icon: 'brain',
                 text: 'Chức Năng',
                 submenu: [
                     {
+                        icon:'circle',
                         text: 'Quản Lý Phòng Ban',
-                        link:'#',
+                        link:'/chucnang/qlphongban',
                     },
                     {
+                        icon:'circle',
                         text: 'Quản Lý Nhân Viên',
-                        link:'#',
+                        link:'/chucnang/qlnhanvien',
                     },
                     {
+                        icon:'circle',
                         text:'Quản Lý Chức Vụ',
-                        link: '',
+                        link: '/chucnang/qlchucvu',
                     },
                 ],
             },
-            {
+            {   
+                icon:'user-friends',
                 text: 'Người Dùng',
                 submenu: [
                     {
+                        icon:'circle',
                         text: 'Quản Lý Người Dùng',
                         link:'#',
                     },
                     {
+                        icon:'circle',
                         text: 'Quản Lý Nhóm Người Dùng',
                         link:'#',
                     },
                 ],
             },
-            {
+            {   
+                icon:'paper-plane',
                 text: 'Văn Bản',
                 submenu: [
                     {
+                        icon:'circle',
                         text: 'Quản Lý Loại Văn Bản',
-                        link:'#',
+                        link:'/vanbanden/qlloaivb',
                     },
                     {
+                        icon:'circle',
                         text: 'Quản Lý Nơi Đến',
-                        link:'#',
+                        link:'/vanbanden/qlnoiden',
                     },
                     {
+                        icon:'circle',
                         text:'Quản Lý Văn Bản Đến',
-                        link: '',
+                        link: '/vanbanden/qlvbden',
+                    },
+                    {
+                        icon:'circle',
+                        text:'Xử Lý Văn Bản Đến',
+                        link: '/vanbanden/xulyvbden',
                     },
                 ],
             },
             {
+                icon:'pager',
                 text: 'Công Việc',
                 submenu: [
                     {
+                        icon:'circle',
                         text: 'Phân Công Công Việc',
-                        link:'#',
+                        link:'/congviec/phancongcv',
                     },
                     {
+                        icon:'circle',
                         text: 'Quản Lý Công Việc',
-                        link:'#',
+                        link:'/congviec/qlcv',
                     },
                     {
+                        icon:'circle',
                         text:'Quản Lý Báo Cáo Công Việc',
-                        link: '',
+                        link: '/congviec/qlbaocaocv',
                     },
                 ],
             },
             {
+                icon:'feather',
                 text: 'Báo Cáo Xử Lý',
                 submenu: [
                     {
+                        icon:'circle',
                         text: 'Theo Dõi Văn Bản Quá Hạn',
                         link:'#',
                     },
                     {
+                        icon:'circle',
                         text: 'Báo Cáo Văn Bản Đến',
                         link:'#',
                     },

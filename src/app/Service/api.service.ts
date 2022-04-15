@@ -12,15 +12,17 @@ export class ApiService {
   PhotoUrl = "http://localhost:57050/Photos";
   APIUser = "http://localhost:57050/api/department"
 
-  private messageSource = new BehaviorSubject('Message From Service');
+  private messageSource = new BehaviorSubject('Trạng Thái Chờ...');
   currentMessage = this.messageSource.asObservable();
-  SharingData = new Subject();
+
+  // SharingData = new Subject();
+
   constructor(
     private http: HttpClient,
   ) { }
 
-  changeMessage(msg: string) {
-    this.messageSource.next(msg);
+  changeMessage(IdVbden: string) {
+    this.messageSource.next(IdVbden);
   }
 
   //Notify
