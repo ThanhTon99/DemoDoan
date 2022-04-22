@@ -16,12 +16,12 @@
     <table class="table table-bordered ">
       <thead style="background-color: #69aed6">
         <tr>
-          <th scope="col" style="width:11%" >Số Thứ Tự</th>
+          <th scope="col" style="width:11%">Số Thứ Tự</th>
           <th scope="col">Tên Văn Bản Đến</th>
           <th scope="col">Mô Tả Văn Bản Đến</th>
           <th scope="col">Nơi Đến</th>
-          <th scope="col">Trạng Thái Xử Lý</th>
-          <th scope="col" style="width:12%">Action</th>
+          <th scope="col">Trạng Thái Công Việc</th>
+          <th scope="col" style="width:18%">Action</th>
         </tr>
       </thead>
       <tbody style="background-color: #d9e9e9">
@@ -30,9 +30,13 @@
           <td>{{row.TenVbden}}</td>
           <td>{{row.MotaVbden}}</td>
           <td>{{row.Noiden}}</td>
-          <td><span class="badge badge-success">{{message}}</span></td>
+          <td><span class="badge badge-primary">{{row.MessageCv}}</span></td>
           <td>
-            <a title="Xử Lý" type="button" data-toggle="modal" (click)="handle(row)" data-target="#exampleModal" class="btn btn-warning">Xử Lý</a>
+            <button title="Xử Lý" [disabled]="row.TrangthaiXuly || row.MessageCv" type="button" data-toggle="modal" (click)="handle(row)" 
+              data-target="#exampleModal" class="btn btn-warning" (click)="Pheduyet($event)">
+              Phê Duyệt
+            </button >
+            <button title="Sửa" type="button" data-toggle="modal" class="btn btn-secondary mx-2" (click)="NotPheDuyet(row)">Không Phê Duyệt</button>
             <!-- <button title="Xóa" class="btn btn-danger mx-2" (click)="deleteVbden(row)">Xóa</button> -->
           </td>
         </tr>
@@ -41,7 +45,8 @@
   </div>
 
   <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document" style="margin-top:3% ;">
       <div class="modal-content">
         <div class="modal-header">
@@ -49,7 +54,7 @@
           <button type="button" id="close" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-        </div>  
+        </div>
         <div class="modal-body">
           <form #formValue="ngForm">
             <div class="card-body">
@@ -61,26 +66,29 @@
                 <small *ngIf="formValue.invalid && formValue.touched" class="form-text text-danger">Yêu cầu điền thông
                   tin</small>
               </div>
-
               <div class="form-group col-12 ">
                 <label>Mô Tả Văn Bản Đến</label>
-                <textarea [(ngModel)]="QlVbdenModel.MotaVbden" class="form-control" name="mota" placeholder="Mô Tả Văn Bản Đến" disabled="">
+                <textarea [(ngModel)]="QlVbdenModel.MotaVbden" class="form-control" name="mota"
+                  placeholder="Mô Tả Văn Bản Đến" disabled="">
                 </textarea>
               </div>
               <div class="form-group col-md-4">
                 <label>Tên Nơi Đến</label>
                 <input class="form-control" type="text" [(ngModel)]="QlVbdenModel.Noiden" name="Noiden" disabled="">
-                <small class="form-text text-muted" *ngIf="formValue.invalid && formValue.untouched">Chọn Nơi Đến</small>
+                <small class="form-text text-muted" *ngIf="formValue.invalid && formValue.untouched">Chọn Nơi
+                  Đến</small>
+              </div>
+              <div class="col-md-4">Xác Nhận Đã Xử Lý
+                <input type="checkbox" [(ngModel)]="QlVbdenModel.TrangthaiXuly" name="Trangthai">
               </div>
             </div>
           </form>
         </div>
         <div class="modal-footer">
-           <button (click)="DuyetVbden()" type="submit" value="Submit" class="btn btn-primary">Duyệt Văn Bản</button>
-           <button (click)="KduyetVbden()" type="submit" value="Submit" class="btn btn-danger">Không Duyệt Văn Bản</button>
+          <!-- <button (click)="DuyetVbden()" type="submit" value="Submit" class="btn btn-primary">Xác Nhận</button> -->
+          <button (click)="KduyetVbden()" type="submit" value="Submit" class="btn btn-danger">Không Duyệt Văn Bản</button>
           <!-- <button type="button" id="cancel" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
         </div>
       </div>
     </div>
   </div>
-

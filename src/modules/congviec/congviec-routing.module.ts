@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from '@modules/auth/guards';
 import { SBRouteData } from '@modules/navigation/models';
 
 import { CongviecModule } from './congviec.module';
@@ -9,18 +10,23 @@ import * as congviecContainers from './containers';
 export const ROUTES: Routes = [
     {
         path: 'phancongcv',
-        canActivate: [],
+        canActivate: [AuthGuard],
         component: congviecContainers.PhancongCvComponent,
         data: {
             title: 'Phân Công Công Việc',
             breadcrumbs: [
                 {
+                    
                     text: 'Xử Lý Công Việc',
                     link: '/vanbanden/xulyvbden',
                 },
                 {
                     text: 'Phân Công Công Việc',
                     active: true,
+                },
+                {
+                    text: 'Quản Lý Công Việc',
+                    link: '/congviec/qlcv',
                 },
             ],
         } as SBRouteData,
@@ -33,8 +39,8 @@ export const ROUTES: Routes = [
             title: 'Quản Lý Công Việc',
             breadcrumbs: [
                 {
-                    text: 'Dashboard',
-                    link: '/dashboard',
+                    text: 'Xử Lý Văn Bản Đến',
+                    link: '/vanbanden/xulyvbden',
                 },
                 {
                     text: 'Quản Lý Công Việc',
@@ -56,6 +62,24 @@ export const ROUTES: Routes = [
                 },
                 {
                     text: 'Quản Lý Báo Cáo Công Việc',
+                    active: true,
+                },
+            ],
+        } as SBRouteData,
+    },
+    {
+        path: 'lscv',
+        canActivate: [],
+        component: congviecContainers.LsCvComponent,
+        data: {
+            title: 'Quản Lý Lịch Sử Công Việc',
+            breadcrumbs: [
+                {
+                    text: 'Quản Lý Văn Bản Đến',
+                    link: '/vanbanden/qlvbden',
+                },
+                {
+                    text: 'Lịch sử công việc',
                     active: true,
                 },
             ],

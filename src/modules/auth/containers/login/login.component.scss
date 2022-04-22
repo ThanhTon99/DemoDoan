@@ -1,1 +1,16 @@
 @import 'styles/variables.scss';
+
+.submit {
+
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    font-size: 20px;
+    color: #ffffff;
+    background: #01a1d6;
+    cursor: pointer;
+    margin: auto;
+}
+    .submit:hover {
+        background: #3e97fd;
+    }

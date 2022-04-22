@@ -16,11 +16,11 @@
     <table class="table table-bordered ">
       <thead style="background-color: #ecc368">
         <tr>
-          <th scope="col" style="width:11%">Số Thứ Tự</th>
-          <th scope="col">Tên Phòng Ban</th>
+          <th scope="col" style="width:7%">Số Thứ Tự</th>
+          <th scope="col" style="width:14%">Tên Phòng Ban</th>
           <th scope="col">Mô Tả Phòng Ban</th>
           <!-- <th scope="col">Tên chuc vu</th> -->
-          <th scope="col" style="width:12%">Action</th>
+          <th scope="col" style="width:10%">Action</th>
         </tr>
       </thead>
       <tbody style="background-color: #d9e9e9">
@@ -69,17 +69,16 @@
                 <ckeditor [(ngModel)]="QlPhongbanModel.MotaPhongban" name="mota" placeholder="Mô tả Phòng Ban">
                 </ckeditor>
               </div>
-              <div class="form-row">
+              <!-- <div class="form-row">
                 <div class="form-group col-md-4">
                   <label>Tên Chức Vụ</label>
                   <select class="form-control" [(ngModel)]="QlPhongbanModel.TenChucvu" name="TenChucvu">
                     <option value="0" disabled>--Select--</option>
                     <option *ngFor="let data of DataChucvu" [ngValue]="data.TenChucvu">{{data.TenChucvu}}</option>
                   </select>
-                  <!-- {{QlPhongbanModel.TenChucvu | json}} -->
                   <small class="form-text text-muted" *ngIf="formValue.invalid && formValue.untouched">Chọn Chức Vụ</small>
                 </div>
-              </div>
+              </div> -->
             </div>
           </form>
         </div>

@@ -1,0 +1,49 @@
+<sb-layout-dashboard>
+  <sb-dashboard-head title="Báo Cáo Của Trưởng Phòng" [hideBreadcrumbs]="false"></sb-dashboard-head>
+  <div class="container-fluid">
+    <br>
+    <div class="col-md-4 form-group pull-right" style="margin-right:7% ;">
+      <div class="input-group">
+        <input type="text" class="form-control" name="filter" [(ngModel)]="filter" placeholder=" Search...">
+        <span>
+          <button class="btn mx-1" type="button" style="background-color: #5ecaca;">Tìm Kiếm</button>
+          <!-- <button title="Báo Cáo" type="button" data-toggle="modal" data-target="#exampleModal"
+            class="btn btn-danger">Tạo Báo Cáo</button>  -->
+        </span> 
+      </div>
+    </div>
+    <table class="table table-bordered ">
+      <thead style="background-color: #f89191">
+        <tr>
+          <th scope="col" style="width:11%">Số Thứ Tự</th>
+          <th scope="col">Tên Văn Bản Đến</th>
+          <th scope="col">Mô Tả Văn Bản Đến</th>
+          <th scope="col">Nơi Đến</th>
+          <th scope="col">Nhân Viên Xử Lý</th>
+          <th scope="col">Trạng Thái Công Việc</th>
+          <th scope="col">Trạng Thái Báo Cáo</th>
+          <th scope="col" style="width:18%">Action</th>
+        </tr>
+      </thead>
+      <tbody style="background-color: #d9e9e9">
+        <tr *ngFor="let row of Data| filter:filter">
+          <td>{{row.IdVbden}}</td>
+          <td>{{row.TenVbden}}</td>
+          <td>{{row.MotaVbden}}</td>
+          <td>{{row.Noiden}}</td>
+          <td>{{row.TenNhanvien}}</td>
+          <td><span class="badge badge-primary">{{row.MessageCv}}</span></td>
+          <td><span class="badge badge-info">{{row.MessageBaocaobgh}}</span></td>
+          <td>
+            <button type="button" [disabled]="row.MessageBaocaobgh" (click)="Bghxacnhan(row)" class="btn btn-warning">
+              Xác Nhận
+            </button>
+            <button type="button" class="btn btn-secondary mx-2" (click)="khongxacnhan(row)">Không Xác Nhận</button>
+            <!-- <button title="Sửa" type="button" data-toggle="modal" class="btn btn-secondary mx-2" ></button> -->
+            <!-- <button title="Xóa" class="btn btn-danger mx-2" (click)="deleteVbden(row)">Xóa</button> -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</sb-layout-dashboard>

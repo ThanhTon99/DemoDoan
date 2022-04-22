@@ -21,7 +21,7 @@
           <th scope="col">Mô Tả Văn Bản</th>
           <th scope="col">Nơi Gửi</th>
           <th scope="col">Tên Nhân Viên</th>
-          <th scope="col">Trạng Thái Xử Lý</th>
+          <th scope="col">Trạng Thái Công Việc</th>
           <th scope="col" style="width:13%">Action</th>
         </tr>
       </thead>
@@ -32,7 +32,7 @@
           <td>{{row.MotaVbden}}</td>
           <td>{{row.Noiden}}</td>
           <td>{{row.TenNhanvien}}</td>
-          <td><span class="badge badge-success">{{message}}</span></td>
+          <td><span class="badge badge-success">{{row.MessageXuly}}</span></td>
           <td>
             <!-- <a title="Sửa" type="button" data-toggle="modal" (click)="onedit(row)" data-target="#exampleModal"
               class="btn btn-info mx-2">Sửa</a> -->
@@ -46,7 +46,8 @@
   </div>
 
   <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document" style="margin-top:3% ;">
       <div class="modal-content">
         <div class="modal-header">
@@ -54,7 +55,7 @@
           <button type="button" id="close" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-        </div>  
+        </div>
         <div class="modal-body">
           <form #formValue="ngForm">
             <div class="card-body">
@@ -68,30 +69,32 @@
               </div>
               <div class="form-group col-12 ">
                 <label>Mô Tả Văn Bản Đến</label>
-                <textarea [(ngModel)]="QlVbdenModel.MotaVbden" class="form-control" name="mota" placeholder="Mô Tả Văn Bản Đến" disabled="">
+                <textarea [(ngModel)]="QlVbdenModel.MotaVbden" class="form-control" name="mota"
+                  placeholder="Mô Tả Văn Bản Đến" disabled="">
                 </textarea>
               </div>
               <div class="form-group col-md-6">
                 <label>Tên Nơi Đến</label>
                 <input class="form-control" type="text" [(ngModel)]="QlVbdenModel.Noiden" name="Noiden" disabled="">
-                <small class="form-text text-muted" *ngIf="formValue.invalid && formValue.untouched">Chọn Nơi Đến</small>
+                <small class="form-text text-muted" *ngIf="formValue.invalid && formValue.untouched">Chọn Nơi
+                  Đến</small>
               </div>
               <div class="form-group col-md-6">
                 <label>Tên Nhân Viên</label>
-                <input class="form-control" type="text" [(ngModel)]="QlVbdenModel.TenNhanvien" name="Noiden" disabled="">
-                <small class="form-text text-muted" *ngIf="formValue.invalid && formValue.untouched">Chọn Nơi Đến</small>
+                <input class="form-control" type="text" [(ngModel)]="QlVbdenModel.TenNhanvien" name="Noiden"
+                  disabled="">
+                <small class="form-text text-muted" *ngIf="formValue.invalid && formValue.untouched">Chọn Nơi
+                  Đến</small>
               </div>
             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button  type="submit" value="Submit" class="btn btn-primary">Phân Công</button>
-           <!-- <button (click)="KduyetVbden()" type="submit" value="Submit" class="btn btn-danger">Không Duyệt Văn Bản</button> -->
-          <!-- <button type="button" id="cancel" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+          <button type="submit" value="Submit" class="btn btn-primary">Phân Công</button>
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!--  -->
   <div class="modal fade" id="phancongModal" tabindex="-1" role="dialog" aria-labelledby="phancongModalLabel"
@@ -109,17 +112,19 @@
             <div class="card-body">
               <div class="form-row">
                 <div class="form-group col-md-12 ">
-                  <label for="title">Tên Nhân Viên </label>
-                  <select class="form-control" [(ngModel)]="QlVbdenModel.TenNhanvien" name="TenNhanvien">
+                  <label for="title">Tên Nhân Viên<a id="sao"> (*)</a> </label>
+                  <select [class.is-invalid]="Name.invalid && Name.touched" #Name="ngModel" required
+                    class="form-control" [(ngModel)]="QlVbdenModel.TenNhanvien" name="TenNhanvien">
                     <option value="0" disabled>--Select--</option>
                     <option *ngFor="let data of DataNhanvien" [ngValue]="data.TenNhanvien">{{data.TenNhanvien}}</option>
                   </select>
+                  <small *ngIf="formValue.invalid && formValue.touched" class="form-text text-danger">Yêu cầu chọn nhân viên</small>
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group col-md-12 ">
                   <label> Ghi Chú</label>
-                  <input class="form-control" type="text" [(ngModel)]="PhancongCvModle.Note" name="Ghichu"
+                  <input class="form-control" type="text" [(ngModel)]="QlVbdenModel.Note" name="Ghichu"
                     placeholder="Ghi Chú">
                 </div>
               </div>
@@ -127,8 +132,8 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button (click)="updateNv()" (change)="updateGhichu()" type="submit" *ngIf="showUpdate" value="Submit"
-            class="btn btn-primary" >Phân Công</button>
+          <button (click)="updateNv()" [disabled]="formValue.invalid" type="submit" *ngIf="showUpdate" value="Submit"
+            class="btn btn-primary">Phân Công</button>
           <button type="button" id="cancel1" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>

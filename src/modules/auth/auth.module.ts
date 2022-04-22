@@ -22,6 +22,8 @@ import * as authServices from './services';
 
 import { CKEditorModule } from 'ckeditor4-angular';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppRoutingModule } from '@app/app-routing.module';
 
 @NgModule({
     imports: [

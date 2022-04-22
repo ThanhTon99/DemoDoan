@@ -32,10 +32,16 @@ export class PhancongCvComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getPhancongCv();
-    this.getNhanvien();
-    this.getVbden();
+     this.getPhancongCv();
+     this.getNhanvien();
+    // this.getVbden();
+    this.getstatusVbden();
     this.api.currentMessage.subscribe(message => this.message = message)
+  }
+  getstatusVbden(){
+    this.apiUrl.getstatusVbden().subscribe(res=>{
+      this.Data = res;
+    })
   }
   getPhancongCv() {
     this.apiUrl.getPhancongCv().subscribe(res => {
@@ -86,12 +92,15 @@ export class PhancongCvComponent implements OnInit {
   //   })
   // }
   updateNv() {
+    this.QlVbdenModel.TrangthaiPhancong = true;
+    this.QlVbdenModel.TrangthaiXuly = false;
+    this.QlVbdenModel.MessageCv = 'Đã Phân Công';
     this.apiUrl.updateVbden(this.QlVbdenModel).subscribe(res => {
-      console.log(res);
-      alert("Sửa Thành Công");
+        console.log(res);
+      alert("Đã Phân Công");
       let ref = document.getElementById('cancel1');
       ref?.click();
-      //this.getPhancongCv();
+      this.getstatusVbden();
     }, () => {
       alert("Something Wrong")
     })

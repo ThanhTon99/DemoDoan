@@ -1,0 +1,123 @@
+<sb-layout-dashboard>
+  <sb-dashboard-head title="Quản Lý Người Dùng" [hideBreadcrumbs]="false"></sb-dashboard-head>
+
+    <!-- Table -->
+    <div class="container-fluid">
+      <br>
+      <div class="col-md-4 form-group pull-right" style="margin-right:7% ;">
+        <div class="input-group">
+          <input type="text" class="form-control" name="filter" [(ngModel)]="filter" placeholder=" Search...">
+          <span>
+            <button class="btn mx-1" type="button" style="background-color: #5ecaca;">Tìm Kiếm</button>
+            <button title="Thêm Mới" (click)="clickAdd()" type="button" data-toggle="modal"
+              data-target="#exampleModal" class="btn btn-success">Thêm Mới</button>
+          </span>
+        </div>
+      </div>
+      <table class="table table-bordered ">
+        <thead style="background-color: #69d69f">
+          <tr>
+            <th scope="col" style="width:11%" >Số Thứ Tự</th>
+            <th scope="col">Tên Người Dùng</th>
+            <th scope="col">Chức Vụ</th>
+            <th scope="col">Phòng Ban</th>
+            <th scope="col">Tài Khoản</th>
+            <th scope="col">Mật Khẩu</th>
+            <th scope="col">Phân Quyền Người Dùng</th>
+            <th scope="col" style="width:12%">Action</th>
+          </tr>
+        </thead>
+        <tbody style="background-color: #d9e9e9">
+          <tr *ngFor="let row of Data| filter:filter">
+            <td>{{row.UserId}}</td>
+            <td>{{row.TenNguoidung}}</td>
+            <td>{{row.Chucvu}}</td>
+            <td>{{row.Phongban}}</td>
+            <td>{{row.Username}}</td>
+            <td>{{row.Password}}</td>
+            <td>{{row.Roles}}</td>
+            <td>
+              <a title="Sửa" type="button" data-toggle="modal" (click)="onedit(row)" data-target="#exampleModal" class="btn btn-info">Sửa</a>
+              <button title="Xóa" class="btn btn-danger mx-2" (click)="deleteUser(row)">Xóa</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document" style="margin-top:3% ;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Chi Tiết Người Dùng</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>  
+        <div class="modal-body">
+          <form #formValue="ngForm">
+            <div class="card-body">
+              <div class="form-group col-md-12 ">
+                <label for="title">Tài Khoản<a id="sao"> (*)</a></label>
+                <input [class.is-invalid]="Name.invalid && Name.touched" type="text" 
+                  [(ngModel)]="QlUser.Username" #Name="ngModel" class="form-control" name="Name"
+                  placeholder="Tài Khoản">
+                <small *ngIf="formValue.invalid && formValue.touched" class="form-text text-danger">Yêu cầu điền thông tin</small>
+              </div>
+
+              <div class="form-group col-12 ">
+                <label>Mật Khẩu</label>
+                <textarea [(ngModel)]="QlUser.Password" class="form-control" name="permission" placeholder="Password">
+                </textarea>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-3">
+                  <label>Phân Quyền Người Dùng<a id="sao"> (*)</a></label>
+                  <select class="form-control" [(ngModel)]="QlUser.Roles" name="Roles">
+                    <option value="0" disabled>--Select--</option>
+                    <option *ngFor="let data of DataUserteam" [ngValue]="data.UserteamName">{{data.UserteamName}}</option>
+                  </select>
+                  <small class="form-text text-muted" >Chọn Quyền Người Dùng</small>
+                  <!-- *ngIf="formValue.invalid && formValue.touched" -->
+                </div>
+                <div class="form-group col-md-3">
+                  <label>Tên Người Dùng</label>
+                  <select class="form-control" [(ngModel)]="QlUser.TenNguoidung" name="Username">
+                    <option value="0" disabled>--Select--</option>
+                    <option *ngFor="let data of DataTenNguoidung" [ngValue]="data.TenNhanvien">{{data.TenNhanvien}}</option>
+                  </select>
+                  <small class="form-text text-muted" >Chọn Tên Người Dùng</small>
+                </div>
+                <div class="form-group col-md-3">
+                  <label>Chức Vụ</label>
+                  <select class="form-control" [(ngModel)]="QlUser.Chucvu" name="chucvu">
+                    <option value="0" disabled>--Select--</option>
+                    <option *ngFor="let data of DataChucvu" [ngValue]="data.TenChucvu">{{data.TenChucvu}}</option>
+                  </select>
+                  <small class="form-text text-muted" >Chọn Chức Vụ</small>
+                </div>
+                <div class="form-group col-md-3">
+                  <label>Phòng Ban</label>
+                  <select class="form-control" [(ngModel)]="QlUser.Phongban" name="phongban" >
+                    <option value="0" disabled>--Select--</option>
+                    <option *ngFor="let data of DataPhongban" [ngValue]="data.TenPhongban">{{data.TenPhongban}}</option>
+                  </select>
+                  <small class="form-text text-muted" >Chọn Phòng Ban</small>
+                </div>
+              </div>
+              
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button (click)="postUser()" type="submit" *ngIf="showAdd" value="submit" [disabled]="formValue.invalid" 
+          class="btn btn-primary">Add</button>
+          <button (click)="updateUser()" type="submit" *ngIf="showUpdate" value="Submit"
+            [disabled]="formValue.invalid" class="btn btn-primary">Update</button>
+          <button type="button" id="cancel" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</sb-layout-dashboard>

@@ -10,7 +10,8 @@ export class ApiService {
 
   APIurl = "http://localhost:57050/api/notify";
   PhotoUrl = "http://localhost:57050/Photos";
-  APIUser = "http://localhost:57050/api/department"
+  APIUser = "http://localhost:57050/api/department";
+  ApiVbden = 'http://localhost:57050/api/QLVbden';
 
   private messageSource = new BehaviorSubject('Trạng Thái Chờ...');
   currentMessage = this.messageSource.asObservable();
@@ -21,8 +22,9 @@ export class ApiService {
     private http: HttpClient,
   ) { }
 
-  changeMessage(IdVbden: string) {
-    this.messageSource.next(IdVbden);
+  changeMessage(data: any) {
+    this.messageSource.next(data);
+    return this.http.put(this.ApiVbden, data);
   }
 
   //Notify

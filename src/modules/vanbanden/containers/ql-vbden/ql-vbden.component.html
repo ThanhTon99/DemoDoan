@@ -3,24 +3,28 @@
 
   <div class="container-fluid">
     <br>
-    <div class="col-md-4 form-group pull-right" style="margin-right:7% ;">
+    <div class="col-md-5 form-group pull-right" style="margin-right:2% ;">
       <div class="input-group">
-        <input type="text" class="form-control" name="filter" [(ngModel)]="filter" placeholder=" Search...">
+        <input type="text" class="form-control" name="filter" [(ngModel)]="filter" placeholder=" Searching...">
         <span>
-          <button class="btn mx-1" type="button" style="background-color: #5ecaca;">Tìm Kiếm</button>
-          <button title="Thêm Mới" (click)="clickAdd()" type="button" data-toggle="modal"
-            data-target="#exampleModal" class="btn btn-success">Thêm Mới</button>
+          <button title="Tìm Kiếm" class="btn mx-1" type="button" style="background-color: #5ecaca;">Tìm Kiếm</button>
+          <button title="Thêm Mới" (click)="clickAdd()" type="button" data-toggle="modal" data-target="#exampleModal"
+            class="btn btn-success">Thêm Mới</button>
+          <button title="Đã Lưu" type="button" style="background-color: rgb(250, 146, 190);" routerLink="/congviec/lscv"
+            class="btn mx-1">Đã Lưu</button>
         </span>
       </div>
     </div>
     <table class="table table-bordered ">
       <thead style="background-color: #69aed6">
         <tr>
-          <th scope="col" style="width:11%" >Số Thứ Tự</th>
+          <th scope="col" style="width:11%">Số Thứ Tự</th>
           <th scope="col">Tên Văn Bản Đến</th>
           <th scope="col">Mô Tả Văn Bản Đến</th>
           <th scope="col">Nơi Đến</th>
-          <th scope="col" style="width:12%">Action</th>
+          <th scope="col">Trạng Thái Công Việc</th>
+          <th scope="col">Trạng Thái Báo Cáo</th>
+          <th scope="col" style="width:13%">Action</th>
         </tr>
       </thead>
       <tbody style="background-color: #d9e9e9">
@@ -29,9 +33,14 @@
           <td>{{row.TenVbden}}</td>
           <td>{{row.MotaVbden}}</td>
           <td>{{row.Noiden}}</td>
+          <td><span class="badge badge-primary">{{row.MessageCv}}</span></td>
+          <td><span class="badge badge-info">{{row.MessageBaocaobgh}}</span></td>
           <td>
-            <a title="Sửa" type="button" data-toggle="modal" (click)="onedit(row)" data-target="#exampleModal" class="btn btn-info">Sửa</a>
+            <a title="Sửa" type="button" data-toggle="modal" (click)="onedit(row)" data-target="#exampleModal"
+              class="btn btn-info">Sửa</a>
             <button title="Xóa" class="btn btn-danger mx-2" (click)="deleteVbden(row)">Xóa</button>
+            <button title="Lưu" [disabled]="!row.MessageBaocaobgh" class="btn btn-dark mx-1" (click)="save(row)"><i
+                class="fas fa-save"></i></button>
           </td>
         </tr>
       </tbody>
@@ -39,7 +48,8 @@
   </div>
 
   <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document" style="margin-top:3% ;">
       <div class="modal-content">
         <div class="modal-header">
@@ -47,7 +57,7 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-        </div>  
+        </div>
         <div class="modal-body">
           <form #formValue="ngForm">
             <div class="card-body">
@@ -59,10 +69,10 @@
                 <small *ngIf="formValue.invalid && formValue.touched" class="form-text text-danger">Yêu cầu điền thông
                   tin</small>
               </div>
-
               <div class="form-group col-12 ">
                 <label>Mô Tả Văn Bản Đến</label>
-                <textarea [(ngModel)]="QlVbdenModel.MotaVbden" class="form-control" name="mota" placeholder="Mô Tả Văn Bản Đến">
+                <textarea [(ngModel)]="QlVbdenModel.MotaVbden" class="form-control" name="mota"
+                  placeholder="Mô Tả Văn Bản Đến">
                 </textarea>
               </div>
               <div class="form-group col-md-4">
@@ -72,19 +82,23 @@
                   <option *ngFor="let data of DataVbden" [ngValue]="data.TenNoiden">{{data.TenNoiden}}</option>
                 </select>
                 <!-- {{QlPhongbanModel.TenChucvu | json}} -->
-                <small class="form-text text-muted" *ngIf="formValue.invalid && formValue.untouched">Chọn Nơi Đến</small>
+                <small class="form-text text-muted" *ngIf="formValue.invalid && formValue.untouched">Chọn Nơi
+                  Đến</small>
+              </div>
+              <div class="form-group col-md-4">
+                <label for="Trạng Thái Phê Duyệt">Trạng Thái Phê Duyệt </label>
+                <input class="col-md-1" type="checkbox" [(ngModel)]="QlVbdenModel.TrangthaiPheduyet" name="Trangthai">
               </div>
             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button (click)="postVbden()" type="submit" *ngIf="showAdd" value="Submit"
-            [disabled]="formValue.invalid" class="btn btn-primary">Add</button>
-          <button (click)="updateVbden()" type="submit" *ngIf="showUpdate" value="Submit"
-            [disabled]="formValue.invalid" class="btn btn-primary">Update</button>
+          <button (click)="postVbden()" type="submit" *ngIf="showAdd" value="Submit" [disabled]="formValue.invalid"
+            class="btn btn-primary">Add</button>
+          <button (click)="updateVbden()" type="submit" *ngIf="showUpdate" value="Submit" [disabled]="formValue.invalid"
+            class="btn btn-primary">Update</button>
           <button type="button" id="cancel" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
   </div>
-

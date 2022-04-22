@@ -8,3 +8,4 @@ export class NavigationGuard implements CanActivate {
         return of(true);
     }
 }
+

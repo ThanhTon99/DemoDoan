@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import { SideNavItems, SideNavSection } from '@modules/navigation/models';
 
 export const sideNavSections: SideNavSection[] = [
@@ -56,10 +57,10 @@ export const sideNavItems: SideNavItems = {
                         text: 'Forgot Password',
                         link: '/auth/forgot-password',
                     },
-                    {
-                        text: 'Manage User',
-                        link:'/auth/manageUser'
-                    },
+                    // {
+                    //     text: 'Manage User',
+                    //     link:'/auth/manageUser'
+                    // },
                 ],
             },
             {   
@@ -109,12 +110,13 @@ export const sideNavItems: SideNavItems = {
                     {
                         icon:'circle',
                         text: 'Quản Lý Người Dùng',
-                        link:'#',
+                        link:'/user/qlnguoidung',
+                        
                     },
                     {
                         icon:'circle',
                         text: 'Quản Lý Nhóm Người Dùng',
-                        link:'#',
+                        link:'/user/qlnhomnguoidung',
                     },
                 ],
             },
@@ -163,6 +165,11 @@ export const sideNavItems: SideNavItems = {
                         text:'Quản Lý Báo Cáo Công Việc',
                         link: '/congviec/qlbaocaocv',
                     },
+                    {
+                        icon:'circle',
+                        text:'Lịch Sử Công Việc',
+                        link: '/congviec/lscv',
+                    },
                 ],
             },
             {
@@ -176,8 +183,23 @@ export const sideNavItems: SideNavItems = {
                     },
                     {
                         icon:'circle',
-                        text: 'Báo Cáo Văn Bản Đến',
+                        text: 'Thiết Lập Thời Gian Xử Lý',
                         link:'#',
+                    },
+                    {
+                        icon:'circle',
+                        text: 'Báo Cáo Văn Bản Đến Của Nhân Viên',
+                        link:'/baocao/baocaonv',
+                    },
+                    {
+                        icon:'circle',
+                        text: 'Báo Cáo Văn Bản Đến Của Trưởng Phòng',
+                        link:'/baocao/baocaotp',
+                    },
+                    {
+                        icon:'circle',
+                        text: 'Báo Cáo Văn Bản Đến Của BGH',
+                        link:'/baocao/baocaobgh',
                     },
                 ],
             },

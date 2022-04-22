@@ -1,24 +1,49 @@
-<sb-layout-auth
-    ><div class="container">
+<sb-layout-auth>
+    <nav class="navbar" style="background: linear-gradient(to right, rgb(36, 49, 105), rgb(7, 171, 226));">
+        <div class="container-fluid">
+          <h1 title="Đât là tiêu đề" style="color: aliceblue;">QUẢN LÝ VĂN BẢN</h1>
+          <div class="d-flex">
+            <i style="font-size: 500%;" class="fab fa-phoenix-framework"></i>
+          </div>
+        </div>
+      </nav>
+    <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-5">
                 <div class="card shadow-lg border-0 rounded-lg mt-5">
-                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
+                    <div class="card-header">
+                        <h3 class="text-center font-weight-light my-4">Đăng Nhập</h3>
+                    </div>
                     <div class="card-body">
-                        <form>
-                            <div class="form-group"><label class="small mb-1" for="inputEmailAddress">Email</label><input class="form-control py-4" id="inputEmailAddress" type="email" placeholder="Enter email address" /></div>
-                            <div class="form-group"><label class="small mb-1" for="inputPassword">Password</label><input class="form-control py-4" id="inputPassword" type="password" placeholder="Enter password" /></div>
+                        <form action="/?r=1900535053" method="post" [formGroup]="loginForm" (ngSubmit)="login()">
                             <div class="form-group">
-                                <div class="custom-control custom-checkbox"><input class="custom-control-input" id="rememberPasswordCheck" type="checkbox" /><label class="custom-control-label" for="rememberPasswordCheck">Remember password</label></div>
+                                <label class=" mb-1" for="inputEmailAddress">Tài Khoản</label>
+                                <input formControlName="Username" autocomplete="off" class="form-control py-4" id="Username" name="Username"
+                                 type="text" placeholder="Tên Tài Khoản"/>
                             </div>
-                            <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0"><a class="small" routerLink="/auth/forgot-password">Forgot Password?</a><a class="btn btn-primary" routerLink="/dashboard">Login</a></div>
+                            <div class="form-group">
+                                <label class=" mb-1" for="inputPassword">Mật Khẩu</label>
+                                <input formControlName="Password" autocomplete="off" class="form-control py-4" id="Password" name="Password"
+                                 type="password" placeholder="Mật Khẩu" />
+                            </div>
+                            <div class="form-group">
+                                <div class="custom-control custom-checkbox">
+                                    <input class="custom-control-input" id="rememberPasswordCheck" type="checkbox" />
+                                    <label class="custom-control-label" for="rememberPasswordCheck">Nhớ Mật Khẩu</label>
+                                </div>
+                            </div>
+                            <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                                <button style="margin: auto;" type="submit" class="submit">Đăng Nhập</button>
+                                <!-- <a class="btn btn-primary" type="submit" style="margin: auto;" >Đăng Nhập</a> -->
+                            </div>
+                            <!-- <a class="small" routerLink="/auth/forgot-password">Forgot Password?</a> -->
                         </form>
                     </div>
                     <div class="card-footer text-center">
-                        <div class="small"><a routerLink="/auth/register">Need an account? Sign up!</a></div>
+                        <div class="small"><a routerLink="/auth/register">Đăng Ký Tài Khoản!</a></div>
                     </div>
                 </div>
             </div>
         </div>
-    </div></sb-layout-auth
->
+    </div>
+</sb-layout-auth>

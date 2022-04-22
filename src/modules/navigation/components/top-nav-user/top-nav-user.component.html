@@ -3,13 +3,16 @@
     <div class="dropdown-menu dropdown-menu-right" ngbDropdownMenu aria-labelledby="dropdownUser">
         <h6 class="dropdown-header">
             <div class="dropdown-user-details">
-                <div class="dropdown-user-details-name">{{ user.firstName }} {{ user.lastName }}</div>
-                <div class="dropdown-user-details-email">{{ user.email }}</div>
+                <div class="dropdown-user-details-name">Đề Tài :</div>
+                <!-- {{ user.firstName }} {{ user.lastName }} -->
+                <div class="dropdown-user-details-email">Phần Mềm Quản Lý Văn Bản</div>
+                <!-- {{ user.email }} -->
             </div>
         </h6>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" routerLink="/dashboard">Settings</a><a class="dropdown-item" routerLink="/dashboard">Activity Log</a>
+        <a class="dropdown-item" routerLink="/dashboard">Settings</a>
+        <a class="dropdown-item" routerLink="/dashboard">Activity Log</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" routerLink="/dashboard">Logout</a>
+        <a class="dropdown-item" routerLink="/auth/login">Logout</a>
     </div>
 </li>

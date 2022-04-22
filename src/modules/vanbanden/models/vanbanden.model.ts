@@ -15,4 +15,16 @@ export class QLVbden{
     Noiden: string = '';
     TenNhanvien :string ='';
     TrangthaiXuly: boolean | undefined;
+    TrangthaiPhancong: boolean | undefined;
+    TrangthaiPheduyet: boolean | undefined;
+    BcNhanvien: boolean | undefined;
+    BcTruongphong: boolean | undefined;
+    BcBgh: boolean | undefined;
+    MessageXuly: string= '';
+    MessageCv :string = '';
+    MessageBaocaonv: string = '';
+    MessageBaocaotp: string ='';
+    MessageBaocaobgh:string = '';
+    Note: string = '';
+    Save: boolean | undefined;
 }

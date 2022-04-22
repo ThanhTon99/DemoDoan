@@ -31,6 +31,14 @@ export class QlVbdenComponent implements OnInit {
       this.Data = res;
     })
   }
+  save(row:any){
+    this.QlVbdenModel = row
+    this.QlVbdenModel.Save = true;
+    this.apiUrl.updateVbden(this.QlVbdenModel).subscribe(() => {
+      alert("Lưu Văn Bản Thành Công")
+      this.getVbden();
+    })
+  }
   getNoiden(){
     this.apiUrl.getNoiden().subscribe(res=>{
       this.DataVbden = res;
@@ -45,8 +53,10 @@ export class QlVbdenComponent implements OnInit {
     this.formValue.reset()
     this.showAdd = true;
     this.showUpdate = false;
+    this.QlVbdenModel.TrangthaiPheduyet = true;
   }
   postVbden(){
+    this.QlVbdenModel.MessageXuly = "Chờ Xử Lý";
     this.apiUrl.postVbden(this.QlVbdenModel).subscribe(res => {
       console.log(res);
       alert("Thêm Mới Thành Công")

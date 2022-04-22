@@ -15,8 +15,17 @@ constructor(
 ) { }
 
   //Phân Công Công Việc
+  getstatusVbden(){
+    return this.http.get(this.ApiVbden+'/getstatus')
+  }
+  getTTPC(){
+    return this.http.get(this.ApiVbden+ '/getTTPC')
+  }
   getPhancongCv() {
     return this.http.get(this.ApiPhancongCv);
+  }
+  getSave(){
+    return this.http.get(this.ApiVbden+'/getsave')
   }
   postPhancongCv(data: any) {
     return this.http.post(this.ApiPhancongCv, data);

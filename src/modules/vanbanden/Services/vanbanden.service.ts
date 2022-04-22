@@ -44,6 +44,9 @@ export class VanbandenService {
   }
 
   //Quản Lý Văn Bản Đến
+  getPheduyet(){
+    return this.http.get(this.ApiVbden + '/getTTPD')
+  }
   getVbden(): Observable<any> {
     return this.http.get(this.ApiVbden);
   }
