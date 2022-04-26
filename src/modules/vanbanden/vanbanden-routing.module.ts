@@ -6,10 +6,12 @@ import { VanbandenModule } from './vanbanden.module';
 
 import * as vanbandenContainers from './containers';
 
+import { VanbandenGuard } from './guards';
+
 export const ROUTES: Routes = [
     {
         path: 'qlloaivb',
-        canActivate: [],
+        canActivate: [VanbandenGuard],
         component: vanbandenContainers.QlLoaivbComponent,
         data: {
             title: 'Quản Lý Loại Văn Bản',
@@ -27,7 +29,7 @@ export const ROUTES: Routes = [
     },
     {
         path: 'qlnoiden',
-        canActivate: [],
+        canActivate: [VanbandenGuard],
         component: vanbandenContainers.QlNoidenComponent,
         data: {
             title: 'Quản Lý Nơi Đến',
@@ -45,7 +47,7 @@ export const ROUTES: Routes = [
     },
     {
         path: 'qlvbden',
-        canActivate: [],
+        canActivate: [VanbandenGuard],
         component: vanbandenContainers.QlVbdenComponent,
         data: {
             title: 'Quản Lý Văn Bản Đến',
@@ -63,7 +65,7 @@ export const ROUTES: Routes = [
     },
     {
         path: 'xulyvbden',
-        canActivate: [],
+        canActivate: [VanbandenGuard],
         component: vanbandenContainers.XulyVbdenComponent,
         data: {
             title: 'Xử Lý Văn Bản Đến',

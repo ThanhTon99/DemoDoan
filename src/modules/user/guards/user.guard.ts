@@ -5,7 +5,8 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ChucnangGuard implements CanActivate {
+export class UserGuard implements CanActivate {
+  //qlnguoidung, qlnhomnguoidung
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {

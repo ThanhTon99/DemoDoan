@@ -7,10 +7,12 @@ import { CongviecModule } from './congviec.module';
 
 import * as congviecContainers from './containers';
 
+import { CongviecGuard } from './guards';
+
 export const ROUTES: Routes = [
     {
         path: 'phancongcv',
-        canActivate: [AuthGuard],
+        canActivate: [CongviecGuard],
         component: congviecContainers.PhancongCvComponent,
         data: {
             title: 'Phân Công Công Việc',
@@ -33,7 +35,7 @@ export const ROUTES: Routes = [
     },
     {
         path: 'qlcv',
-        canActivate: [],
+        canActivate: [CongviecGuard],
         component: congviecContainers.QlCvComponent,
         data: {
             title: 'Quản Lý Công Việc',
@@ -51,7 +53,7 @@ export const ROUTES: Routes = [
     },
     {
         path: 'qlbaocaocv',
-        canActivate: [],
+        canActivate: [CongviecGuard],
         component: congviecContainers.QlbaocaoCvComponent,
         data: {
             title: 'Quản Lý Báo Cáo Công Việc',
@@ -69,7 +71,7 @@ export const ROUTES: Routes = [
     },
     {
         path: 'lscv',
-        canActivate: [],
+        canActivate: [CongviecGuard],
         component: congviecContainers.LsCvComponent,
         data: {
             title: 'Quản Lý Lịch Sử Công Việc',

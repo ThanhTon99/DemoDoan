@@ -5,10 +5,12 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ChucnangGuard implements CanActivate {
+export class VanbandenGuard implements CanActivate {
+  //qlloaivb, qlnoiden, qlvbden, xulyvbden
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+
     return true;
   }
   

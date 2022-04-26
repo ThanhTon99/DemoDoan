@@ -6,10 +6,12 @@ import { ChucnangModule } from './chucnang.module';
 
 import * as chucnangContainers from './containers';
 
+import { ChucnangGuard } from './guards';
+
 export const ROUTES: Routes = [
     {
         path:'qlchucvu',
-        canActivate:[],
+        canActivate:[ChucnangGuard],
         component: chucnangContainers.QlChucvuComponent,
         data: {
             title: 'Quản Lý Chức Vụ',
@@ -27,7 +29,7 @@ export const ROUTES: Routes = [
     },
     {
         path:'qlnhanvien',
-        canActivate:[],
+        canActivate:[ChucnangGuard],
         component: chucnangContainers.QlNhanvienComponent,
         data: {
             title: 'Quản Lý Nhân Viên',
@@ -45,7 +47,7 @@ export const ROUTES: Routes = [
     },
     {
         path:'qlphongban',
-        canActivate:[],
+        canActivate:[ChucnangGuard],
         component: chucnangContainers.QlPhongbanComponent,
         data: {
             title: 'Quản Lý Phòng Ban',

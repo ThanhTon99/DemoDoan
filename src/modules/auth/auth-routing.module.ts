@@ -11,17 +11,18 @@ import * as authContainers from './containers';
 
 /* Guards */
 import * as authGuards from './guards';
+import { AuthGuard } from './guards';
 
 /* Routes */
 export const ROUTES: Routes = [
     {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'login',
+        redirectTo: '',
     },
     {
         path: 'login',
-        canActivate: [],
+        canActivate: [AuthGuard],
         component: authContainers.LoginComponent,
         data: {
             title: 'Pages Login - SB Admin Angular',
@@ -29,7 +30,7 @@ export const ROUTES: Routes = [
     },
     {
         path: 'register',
-        canActivate: [],
+        canActivate: [AuthGuard],
         component: authContainers.RegisterComponent,
         data: {
             title: 'Pages Register - SB Admin Angular',
@@ -37,7 +38,7 @@ export const ROUTES: Routes = [
     },
     {
         path: 'forgot-password',
-        canActivate: [],
+        canActivate: [AuthGuard],
         component: authContainers.ForgotPasswordComponent,
         data: {
             title: 'Pages Forgot Password - SB Admin Angular',
@@ -68,7 +69,7 @@ export const ROUTES: Routes = [
                 },
             ],
         } as SBRouteData,            
-        canActivate: [],
+        canActivate: [AuthGuard],
         component: authContainers.MangeUserComponent,
     },
 ];

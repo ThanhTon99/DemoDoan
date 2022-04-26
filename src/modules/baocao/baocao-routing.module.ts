@@ -6,10 +6,12 @@ import { BaocaoModule } from './baocao.module';
 
 import * as baocaoContainer from './containers'
 
+import { BaocaoGuard } from './guards';
+
 export const ROUTES: Routes = [
     {
         path: 'baocaonv',
-        canActivate: [],
+        canActivate: [BaocaoGuard],
         component: baocaoContainer.BaocaoNvComponent,
         data: {
             title: 'Báo Cáo Của Nhân Viên',
@@ -31,7 +33,7 @@ export const ROUTES: Routes = [
     },
     {
         path: 'baocaotp',
-        canActivate: [],
+        canActivate: [BaocaoGuard],
         component: baocaoContainer.BaocaoTpComponent,
         data: {
             title: 'Báo Cáo Của Trưởng Phòng',
@@ -53,7 +55,7 @@ export const ROUTES: Routes = [
     },
     {
         path: 'baocaobgh',
-        canActivate: [],
+        canActivate: [BaocaoGuard],
         component: baocaoContainer.BaocaoBghComponent,
         data: {
             title: 'Báo Cáo Của BGH',

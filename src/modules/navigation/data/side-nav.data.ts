@@ -1,4 +1,5 @@
 import { NgIf } from '@angular/common';
+import { AuthGuard } from '@modules/auth/guards';
 import { SideNavItems, SideNavSection } from '@modules/navigation/models';
 
 export const sideNavSections: SideNavSection[] = [
@@ -57,10 +58,10 @@ export const sideNavItems: SideNavItems = {
                         text: 'Forgot Password',
                         link: '/auth/forgot-password',
                     },
-                    // {
-                    //     text: 'Manage User',
-                    //     link:'/auth/manageUser'
-                    // },
+                    {
+                        text: 'Manage User',
+                        link:'/auth/manageUser'
+                    },
                 ],
             },
             {   

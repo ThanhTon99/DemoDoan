@@ -6,10 +6,12 @@ import { UserModule } from "./user.module";
 
 import * as userContainers from './containers';
 
+import { UserGuard } from './guards';
+
 export const ROUTES: Routes = [
     {
         path: 'qlnguoidung',
-        canActivate: [],
+        canActivate: [UserGuard],
         component: userContainers.QlNguoidungComponent,
         data: {
             title: 'Quản Lý Người Dùng',
@@ -27,7 +29,7 @@ export const ROUTES: Routes = [
     },
     {
         path: 'qlnhomnguoidung',
-        canActivate: [],
+        canActivate: [UserGuard],
         component: userContainers.QlNhomnguoidungComponent,
         data: {
             title: 'Quản Lý Nhóm Người Dùng',
