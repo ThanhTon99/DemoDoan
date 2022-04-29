@@ -1,0 +1,79 @@
+<sb-layout-dashboard>
+  <sb-dashboard-head title="Quản Lý Nơi Đi" [hideBreadcrumbs]="false"></sb-dashboard-head>
+
+  <div class="container-fluid">
+    <br>
+    <div class="col-md-4 form-group pull-right" style="margin-right:7% ;">
+      <div class="input-group">
+        <input type="text" class="form-control" name="filter" [(ngModel)]="filter" placeholder=" Search...">
+        <span>
+          <button class="btn mx-1" type="button" style="background-color: #5ecaca;">Tìm Kiếm</button>
+          <button title="Thêm Mới" (click)="clickAdd()" type="button" data-toggle="modal"
+            data-target="#exampleModal" class="btn btn-success">Thêm Mới</button>
+        </span>
+      </div>
+    </div>
+    <table class="table table-bordered ">
+      <thead style="background-color: #69aed6">
+        <tr>
+          <th scope="col" style="width:11%" >Số Thứ Tự</th>
+          <th scope="col">Tên Nơi Đi</th>
+          <th scope="col">Mô Tả Nơi Đi</th>
+          <th scope="col" style="width:12%">Action</th>
+        </tr>
+      </thead>
+      <tbody style="background-color: #d9e9e9">
+        <tr *ngFor="let row of Data| filter:filter">
+          <td>{{row.IdNoiden}}</td>
+          <td>{{row.TenNoiden}}</td>
+          <td><div [innerHtml]="row.MotaNoiden"></div></td>
+          <td>
+            <a title="Sửa" type="button" data-toggle="modal" (click)="onedit(row)" data-target="#exampleModal" class="btn btn-info">Sửa</a>
+            <button title="Xóa" class="btn btn-danger mx-2" (click)="deleteNoidi(row)">Xóa</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document" style="margin-top:3% ;">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Chi Tiết Nơi Đi</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>  
+        <div class="modal-body">
+          <form #formValue="ngForm">
+            <div class="card-body">
+              <div class="form-group col-md-12 ">
+                <label for="title">Tên Nơi Đi<a id="sao"> (*)</a></label>
+                <input [class.is-invalid]="Name.invalid && Name.touched" type="text" required
+                  [(ngModel)]="QlNoidenModel.TenNoiden" #Name="ngModel" class="form-control" name="Name"
+                  placeholder="Tên Nơi Đi">
+                <small *ngIf="formValue.invalid && formValue.touched" class="form-text text-danger">Yêu cầu điền thông
+                  tin</small>
+              </div>
+
+              <div class="form-group col-12 ">
+                <label>Mô Tả Nơi Đi</label>
+                <textarea [(ngModel)]="QlNoidenModel.MotaNoiden" class="form-control" name="mota" placeholder="Mô tả Nơi Đi">
+                </textarea>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button (click)="postNoidi()" type="submit" *ngIf="showAdd" value="Submit"
+            [disabled]="formValue.invalid" class="btn btn-primary">Add</button>
+          <button (click)="updateNoidi()" type="submit" *ngIf="showUpdate" value="Submit"
+            [disabled]="formValue.invalid" class="btn btn-primary">Update</button>
+          <button type="button" id="cancel" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+

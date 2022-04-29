@@ -10,10 +10,11 @@ import { AppCommonModule } from '@common/app-common.module';
 
 @NgModule({
     declarations: [	AppComponent,
-      
+        
    ],
+   
     imports: [BrowserModule, AppRoutingModule, HttpClientModule,
-        Ng2SearchPipeModule,CKEditorModule, AppCommonModule
+        Ng2SearchPipeModule,CKEditorModule, AppCommonModule,
     ],
     providers: [],
     bootstrap: [AppComponent],

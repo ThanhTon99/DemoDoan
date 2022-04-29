@@ -1,6 +1,7 @@
 /* tslint:disable: ordered-imports*/
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LayoutDashboardComponent } from '@modules/navigation/layouts';
 import { SBRouteData } from '@modules/navigation/models';
 
 /* Module */
@@ -77,5 +78,6 @@ export const ROUTES: Routes = [
 @NgModule({
     imports: [AuthModule, RouterModule.forChild(ROUTES)],
     exports: [RouterModule],
+    providers:[LayoutDashboardComponent]
 })
 export class AuthRoutingModule {}

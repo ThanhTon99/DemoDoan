@@ -20,6 +20,7 @@ import * as navigationGuards from './guards';
 
 /* Services */
 import * as navigationServices from './services';
+import { LoginComponent } from '@modules/auth/containers';
 
 @NgModule({
     imports: [CommonModule, RouterModule, AppCommonModule],

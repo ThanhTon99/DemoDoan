@@ -69,21 +69,20 @@
                 <small *ngIf="formValue.invalid && formValue.touched" class="form-text text-danger">Yêu cầu điền thông
                   tin</small>
               </div>
+              
               <div class="form-group col-12 ">
                 <label>Mô Tả Văn Bản Đến</label>
-                <textarea [(ngModel)]="QlVbdenModel.MotaVbden" class="form-control" name="mota"
-                  placeholder="Mô Tả Văn Bản Đến">
-                </textarea>
+                <ckeditor [(ngModel)]="QlVbdenModel.MotaVbden" name="mota" placeholder="Mô Tả Văn Bản Đến">
+                </ckeditor>
               </div>
               <div class="form-group col-md-4">
                 <label>Tên Nơi Đến</label>
                 <select class="form-control" [(ngModel)]="QlVbdenModel.Noiden" name="Noiden">
-                  <option value="0" disabled>--Select--</option>
+                  <option [ngValue]="null" disabled>--- Chọn Nơi Đến ---</option>
                   <option *ngFor="let data of DataVbden" [ngValue]="data.TenNoiden">{{data.TenNoiden}}</option>
                 </select>
                 <!-- {{QlPhongbanModel.TenChucvu | json}} -->
-                <small class="form-text text-muted" *ngIf="formValue.invalid && formValue.untouched">Chọn Nơi
-                  Đến</small>
+                <small class="form-text text-muted" *ngIf="formValue.invalid && formValue.untouched">Chọn Nơi Đến</small>
               </div>
               <div class="form-group col-md-4">
                 <label for="Trạng Thái Phê Duyệt">Trạng Thái Phê Duyệt </label>

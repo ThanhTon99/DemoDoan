@@ -115,7 +115,7 @@
                   <label for="title">Tên Nhân Viên<a id="sao"> (*)</a> </label>
                   <select [class.is-invalid]="Name.invalid && Name.touched" #Name="ngModel" required
                     class="form-control" [(ngModel)]="QlVbdenModel.TenNhanvien" name="TenNhanvien">
-                    <option value="0" disabled>--Select--</option>
+                    <option [ngValue]="null" disabled>--- Chọn Nhân Viên ---</option>
                     <option *ngFor="let data of DataNhanvien" [ngValue]="data.TenNhanvien">{{data.TenNhanvien}}</option>
                   </select>
                   <small *ngIf="formValue.invalid && formValue.touched" class="form-text text-danger">Yêu cầu chọn nhân viên</small>
@@ -123,7 +123,7 @@
               </div>
               <div class="form-row">
                 <div class="form-group col-md-12 ">
-                  <label> Ghi Chú</label>
+                  <label> Ghi Chú </label>
                   <input class="form-control" type="text" [(ngModel)]="QlVbdenModel.Note" name="Ghichu"
                     placeholder="Ghi Chú">
                 </div>

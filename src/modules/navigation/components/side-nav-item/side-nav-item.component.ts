@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { SBRouteData, SideNavItem } from '@modules/navigation/models';
+import { SBRouteData, SideNavItem, SideNavItemMember } from '@modules/navigation/models';
 
 @Component({
     selector: 'sb-side-nav-item',
@@ -9,6 +9,7 @@ import { SBRouteData, SideNavItem } from '@modules/navigation/models';
 })
 export class SideNavItemComponent implements OnInit {
     @Input() sideNavItem!: SideNavItem;
+    @Input() sideNavItemMember !: SideNavItemMember;
     @Input() isActive!: boolean;
 
     expanded = false;

@@ -7,7 +7,8 @@ import {
     OnDestroy,
     OnInit,
 } from '@angular/core';
-import { sideNavItems, sideNavSections } from '@modules/navigation/data';
+import { LoginComponent } from '@modules/auth/containers';
+import { sideNavItemMembers, sideNavItems, sideNavSections } from '@modules/navigation/data';
 import { NavigationService } from '@modules/navigation/services';
 import { Subscription } from 'rxjs';
 
@@ -16,19 +17,25 @@ import { Subscription } from 'rxjs';
     changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: './layout-dashboard.component.html',
     styleUrls: ['layout-dashboard.component.scss'],
+    providers:[LoginComponent]
 })
 export class LayoutDashboardComponent implements OnInit, OnDestroy {
+    @Input() login : LoginComponent | any
     @Input() static = false;
     @Input() light = false;
     @HostBinding('class.sb-sidenav-toggled') sideNavHidden = false;
     subscription: Subscription = new Subscription();
     sideNavItems = sideNavItems;
+    sideNavItemMembers = sideNavItemMembers;
     sideNavSections = sideNavSections;
     sidenavStyle = 'sb-sidenav-dark';
 
+    NavMember !: boolean ;
+
     constructor(
         public navigationService: NavigationService,
-        private changeDetectorRef: ChangeDetectorRef
+        private changeDetectorRef: ChangeDetectorRef,
+        private loginComponent: LoginComponent,
     ) {}
     ngOnInit() {
         if (this.light) {
@@ -40,6 +47,7 @@ export class LayoutDashboardComponent implements OnInit, OnDestroy {
                 this.changeDetectorRef.markForCheck();
             })
         );
+        this.NavMember = this.loginComponent.user.status
     }
     ngOnDestroy() {
         this.subscription.unsubscribe();

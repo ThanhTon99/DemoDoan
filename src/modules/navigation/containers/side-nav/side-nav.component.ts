@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from '@modules/auth/services';
-import { SideNavItems, SideNavSection } from '@modules/navigation/models';
+import { SideNavItemMembers, SideNavItems, SideNavSection } from '@modules/navigation/models';
 import { NavigationService } from '@modules/navigation/services';
 import { Subscription } from 'rxjs';
 
@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
 export class SideNavComponent implements OnInit, OnDestroy {
     @Input() sidenavStyle!: string;
     @Input() sideNavItems!: SideNavItems;
+    @Input() sideNavItemMembers !: SideNavItemMembers;
     @Input() sideNavSections!: SideNavSection[];
 
     subscription: Subscription = new Subscription();

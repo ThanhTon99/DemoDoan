@@ -16,6 +16,6 @@ export class QlNhanvien {
     IdNhanvien: number | undefined;
     TenNhanvien : string ='';
     Diachi : string = '';
-    Sodienthoai : number | undefined;
+    Sodienthoai : string ='';
     TenChucvu: string = '';
 }

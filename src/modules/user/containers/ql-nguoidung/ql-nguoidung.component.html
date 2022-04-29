@@ -73,9 +73,9 @@
               </div>
               <div class="form-row">
                 <div class="form-group col-md-3">
-                  <label>Phân Quyền Người Dùng<a id="sao"> (*)</a></label>
+                  <label>Phân Quyền<a id="sao"> (*)</a></label>
                   <select class="form-control" [(ngModel)]="QlUser.Roles" name="Roles">
-                    <option value="0" disabled>--Select--</option>
+                    <option [ngValue]="null" disabled>--- Chọn Quyền ---</option>
                     <option *ngFor="let data of DataUserteam" [ngValue]="data.UserteamName">{{data.UserteamName}}</option>
                   </select>
                   <small class="form-text text-muted" >Chọn Quyền Người Dùng</small>
@@ -84,7 +84,7 @@
                 <div class="form-group col-md-3">
                   <label>Tên Người Dùng</label>
                   <select class="form-control" [(ngModel)]="QlUser.TenNguoidung" name="Username">
-                    <option value="0" disabled>--Select--</option>
+                    <option [ngValue]="null" disabled> --- Chọn Tên --- </option>
                     <option *ngFor="let data of DataTenNguoidung" [ngValue]="data.TenNhanvien">{{data.TenNhanvien}}</option>
                   </select>
                   <small class="form-text text-muted" >Chọn Tên Người Dùng</small>
@@ -92,7 +92,7 @@
                 <div class="form-group col-md-3">
                   <label>Chức Vụ</label>
                   <select class="form-control" [(ngModel)]="QlUser.Chucvu" name="chucvu">
-                    <option value="0" disabled>--Select--</option>
+                    <option [ngValue]="null" disabled>--- Chọn Chức Vụ ---</option>
                     <option *ngFor="let data of DataChucvu" [ngValue]="data.TenChucvu">{{data.TenChucvu}}</option>
                   </select>
                   <small class="form-text text-muted" >Chọn Chức Vụ</small>
@@ -100,7 +100,7 @@
                 <div class="form-group col-md-3">
                   <label>Phòng Ban</label>
                   <select class="form-control" [(ngModel)]="QlUser.Phongban" name="phongban" >
-                    <option value="0" disabled>--Select--</option>
+                    <option [ngValue]="null" disabled>--- Chọn Phòng Ban ---</option>
                     <option *ngFor="let data of DataPhongban" [ngValue]="data.TenPhongban">{{data.TenPhongban}}</option>
                   </select>
                   <small class="form-text text-muted" >Chọn Phòng Ban</small>

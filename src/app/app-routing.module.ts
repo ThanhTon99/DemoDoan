@@ -36,6 +36,11 @@ const routes: Routes = [
             import('modules/vanbanden/vanbanden-routing.module').then(m => m.VanbandenRoutingModule),
     },
     {
+        path: 'vanbandi',
+        loadChildren: () =>
+            import('modules/vanbandi/vanbandi-routing.module').then(m => m.VanbandiRoutingModule),
+    },
+    {
         path: 'congviec',
         loadChildren: () =>
             import('modules/congviec/congviec-routing.module').then(m => m.CongviecRoutingModule),

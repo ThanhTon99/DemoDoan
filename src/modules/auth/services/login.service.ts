@@ -36,7 +36,7 @@ export class LoginService {
 
     const page = url.toString().substr(1);
     // console.log('canActivate', this.Roles, url);
-    if (this.Role.includes(this.Roles)) {
+    if (this.Role.includes(page)) {
       return true
     }
     console.log('Ban khong the vao trang: ' + this.Roles);

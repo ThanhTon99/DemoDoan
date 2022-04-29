@@ -6,6 +6,7 @@ export class QLNguoidung{
     TenNguoidung : string ='';
     Chucvu: string = '';
     Phongban : string = '';
+    
 }
 export class QLNhomnguoidung{
     UserteamId : number | undefined;

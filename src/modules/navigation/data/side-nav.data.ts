@@ -1,6 +1,5 @@
-import { NgIf } from '@angular/common';
-import { AuthGuard } from '@modules/auth/guards';
-import { SideNavItems, SideNavSection } from '@modules/navigation/models';
+
+import { SideNavItemMembers, SideNavItems, SideNavSection } from '@modules/navigation/models';
 
 export const sideNavSections: SideNavSection[] = [
     {
@@ -18,13 +17,13 @@ export const sideNavSections: SideNavSection[] = [
    
 ];
 
-export const sideNavItems: SideNavItems = {
+//      --------- Member --------
+export const sideNavItemMembers : SideNavItemMembers ={
     dashboard: {
         icon: 'tachometer-alt',
         text: 'Dashboard',
         link: '/dashboard',
     },
-    // link: '/dashboard/static',
     layouts: {
         icon: 'columns',
         text: 'Layouts',
@@ -49,19 +48,7 @@ export const sideNavItems: SideNavItems = {
                     {
                         text: 'Login',
                         link: '/auth/login',
-                    },
-                    {
-                        text: 'Register',
-                        link: '/auth/register',
-                    },
-                    {
-                        text: 'Forgot Password',
-                        link: '/auth/forgot-password',
-                    },
-                    {
-                        text: 'Manage User',
-                        link:'/auth/manageUser'
-                    },
+                    },                    
                 ],
             },
             {   
@@ -83,8 +70,126 @@ export const sideNavItems: SideNavItems = {
                     
                 ],
             },
+            {
+                icon:'pager',
+                text: 'Công Việc',
+                submenu: [
+                    
+                    {
+                        icon:'circle',
+                        text: 'Quản Lý Công Việc',
+                        link:'/congviec/qlcv',
+                    },
+                    
+                    {
+                        icon:'circle',
+                        text:'Lịch Sử Công Việc',
+                        link: '/congviec/lscv',
+                    },
+                ],
+            },
+            {
+                icon:'feather',
+                text: 'Báo Cáo Xử Lý',
+                submenu: [
+                    
+                    {
+                        icon:'circle',
+                        text: 'Báo Cáo Văn Bản Đến Của Nhân Viên',
+                        link:'/baocao/baocaonv',
+                    },
+                    
+                ],
+            },
+        ],
+    },
+    charts: {
+        icon: 'chart-area',
+        text: 'Charts',
+        link: '/charts',
+    },
+    tables: {
+        icon: 'table',
+        text: 'Tables',
+        link: '/tables',
+    },
+}
+
+export const sideNavItems: SideNavItems = {
+    dashboard: {
+        icon: 'tachometer-alt',
+        text: 'Dashboard',
+        link: '/dashboard',
+    },
+    // link: '/dashboard/static',
+    layouts: {
+        icon: 'columns',
+        text: 'Layouts',
+        submenu: [
+            {
+                text: 'Static Navigation',
+                link: '/dashboard/static',
+            },
+            {
+                text: 'Light Sidenav',
+                link: '/dashboard/light',
+            },
+        ],
+    },
+
+    pages: {
+        icon: 'book-open',
+        text: 'Pages',
+        submenu: [
+            {
+                text: 'Authentication',
+                submenu: [
+                    {
+                        icon:'chevron-right',
+                        text: 'Login',
+                        link: '/auth/login',
+                    },
+                    {
+                        icon:'chevron-right',
+                        text: 'Register',
+                        link: '/auth/register',
+                    },
+                    {
+                        icon:'chevron-right',
+                        text: 'Forgot Password',
+                        link: '/auth/forgot-password',
+                    },
+                    {
+                        icon:'chevron-right',
+                        text: 'Manage User',
+                        link:'/auth/manageUser'
+                    },
+                ],
+            },
             {   
-                icon: 'brain',
+               // icon:'ban',
+                text: 'Error',
+                submenu: [
+                    {
+                        icon:'chevron-right',
+                        text: '401 Page',
+                        link: '/error/401',
+                    },
+                    {
+                        icon:'chevron-right',
+                        text: '404 Page',
+                        link: '/error/404',
+                    },
+                    {
+                        icon:'chevron-right',
+                        text: '500 Page',
+                        link: '/error/500',
+                    },
+                    
+                ],
+            },
+            {   
+                icon: 'list',
                 text: 'Chức Năng',
                 submenu: [
                     {
@@ -122,8 +227,8 @@ export const sideNavItems: SideNavItems = {
                 ],
             },
             {   
-                icon:'paper-plane',
-                text: 'Văn Bản',
+                icon:'indent',
+                text: 'Văn Bản Đến',
                 submenu: [
                     {
                         icon:'circle',
@@ -147,8 +252,34 @@ export const sideNavItems: SideNavItems = {
                     },
                 ],
             },
+            {   
+                icon:'outdent',
+                text: 'Văn Bản Đi',
+                submenu: [
+                    {
+                        icon:'circle',
+                        text: 'Quản Lý Loại Văn Bản',
+                        link:'#',
+                    },
+                    {
+                        icon:'circle',
+                        text: 'Quản Lý Nơi Đi',
+                        link:'/vanbandi/qlnoidi',
+                    },
+                    {
+                        icon:'circle',
+                        text:'Quản Lý Văn Bản Đi',
+                        link: '/vanbandi/qlvbdi',
+                    },
+                    {
+                        icon:'circle',
+                        text:'Xử Lý Văn Bản Đi',
+                        link: '#',
+                    },
+                ],
+            },
             {
-                icon:'pager',
+                icon:'pen',
                 text: 'Công Việc',
                 submenu: [
                     {
@@ -174,8 +305,8 @@ export const sideNavItems: SideNavItems = {
                 ],
             },
             {
-                icon:'feather',
-                text: 'Báo Cáo Xử Lý',
+                icon:'bug',
+                text: 'Báo Cáo Xử Lý Văn Bản Đến',
                 submenu: [
                     {
                         icon:'circle',
